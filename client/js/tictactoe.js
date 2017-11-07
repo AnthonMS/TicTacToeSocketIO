@@ -42,11 +42,11 @@ class Tictactoe
         $board.on('mouseenter', '.col.empty', function () {
             const col = $(this).data('col');
             const row = $(this).data('row');
-            console.log(row + ', ' + col);
+            //console.log(row + ', ' + col);
             // checks if the class of the div is empty or not
             if ($(this).hasClass('empty'))
             {
-                // If it is empty, we will change it to hover-red to make hover effect for red player (only for now)
+                // If it is empty, we will change it to hover-(color) (Where the color is the player)
                 $(this).addClass(`hover-${that.player}`);
             }
         });
@@ -59,18 +59,182 @@ class Tictactoe
         $board.on('click', '.col.empty', function () {
             const col = $(this).data('col');
             const row = $(this).data('row');
+            // Checks if div is class empty
             if ($(this).hasClass('empty'))
             {
-                // If it is empty, we will change it to hover-red to make hover effect for red player (only for now)
                 const $emptyCell = $(this);
                 $emptyCell.removeClass(`empty hover-${that.player}`);
                 $emptyCell.addClass(that.player);
+                $emptyCell.attr('data-player', that.player);
+
+                that.checkForWinner2(
+                    $emptyCell.data('row'),
+                    $emptyCell.data('col')
+                );
+
+                /*const winner = that.checkForWinner(
+                    $emptyCell.data('row'),
+                    $emptyCell.data('col'));
+                if (winner)
+                {
+                    alert(`Game Over! Player ${that.player} has won!`);
+                    return;
+                }*/
+
                 // If player variable is red, change it to black, or else change it to red.
                 that.player = (that.player === 'red') ? 'black' : 'red';
                 $(this).trigger('mouseenter');
             }
 
         });
+    }
+
+    checkForWinner2(row, col)
+    {
+        const that = this;
+        let totalVer = 0;
+        let totalHor = 0;
+        //console.log(playerColor);
+
+        function $getCell(i, j)
+        {
+            return $(`.col[data-row='${i}'][data-col='${j}']`);
+        }
+
+        let $cellClicked = $getCell(row, col);
+
+        // CHECK HORIZONTAL
+        function checkHor()
+        {
+            for (let j = 0; j < that.COLS; j++)
+            {
+                //console.log(`row: ${row} col: ${col}`);
+                let $checkCell2 = $getCell($cellClicked.data('row'), j);
+                if ($checkCell2.data('player') != that.player)
+                {
+                    console.log(`!hor/check: ${$cellClicked.data('row')}, ${j} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalHor: ${totalHor}`);
+                    return false;
+                } else {
+                    totalHor++;
+                    console.log(`hor/check: ${$cellClicked.data('row')}, ${j} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalHor: ${totalHor}`);
+                }
+            }
+            return true;
+        }
+        if (checkHor() == true)
+        {
+            //if (totalHor >= 3)
+            //{
+            alert(`Game Over! ${that.player} player has won!`);
+            //}
+        }
+        // ----------------------------------------------------------
+        //console.log('hello testing');
+        // CHECK VERTICAL
+        // this for loop checks above and below (the rows), if the div data attr 'player'
+        // is the same as the one who just put a piece down.
+        function checkVer()
+        {
+            for (let i = 0; i < that.ROWS; i++)
+            {
+                let $checkCell = $getCell(i, $cellClicked.data('col'));
+                // if the data 'player' is the same as above or below data, add point to totalVer.
+                if ($checkCell.data('player') != that.player)
+                {
+                    console.log(`!ver/check: ${i}, ${$cellClicked.data('col')} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalVer: ${totalVer}`);
+                    return false;
+                } else {
+                    totalVer++;
+                    console.log(`ver/check: ${i}, ${$cellClicked.data('col')} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalVer: ${totalVer}`);
+                }
+            }
+            return true;
+        }
+        if (checkVer() == true)
+        {
+            //if (totalHor >= 3)
+            //{
+            alert(`Game Over! ${that.player} player has won!`);
+            //}
+        }
+
+        // ----------------------------------------------------------
+        //console.log('hello testing2');
+        
+    }
+
+
+
+
+
+
+
+    checkForWinner(row, col)
+    {
+        const that = this;
+
+        function $getCell(i, j)
+        {
+            return $(`.col[data-row='${i}'][data-col='${j}']`);
+        }
+        
+        function checkDirection(direction)
+        {
+            let total = 0;
+            let i = row + direction.i;
+            let j = col + direction.j;
+            let $next = $getCell(i, j);
+            while (i >= 0 &&
+                i < that.ROWS &&
+                j >= 0 &&
+                j < that.COLS &&
+                $next.data('player') === that.player)
+            {
+                total++;
+                i += direction.i;
+                j += direction.j;
+                $next = $getCell(i, j);
+            }
+            return total;
+        }
+
+
+        function checkWin(directionA, directionB)
+        {
+            const total = 1 +
+                checkDirection(directionA) +
+                checkDirection(directionB);
+            if (total >= 3)
+            {
+                return that.player;
+            } else {
+                return null;
+            }
+        }
+        
+        function checkDiagonalBLtoTR() {
+            return checkWin({i: 1, j: -1}, {i: 1, j: 1});
+        }
+
+        function checkDiagonalTLtoBR() {
+            return checkWin({i: 1, j: 1}, {i: -1, j: -1});
+        }
+
+        function checkVerticals()
+        {
+            return checkWin({i: -1, j: 0}, {i: 1, j: 0});
+        }
+
+        function checkHorizontals()
+        {
+            return checkWin({i: 0, j: -1}, {i: 0, j: 1});
+        }
+
+        return checkVerticals() ||
+            checkHorizontals() ||
+            checkDiagonalBLtoTR() ||
+            checkDiagonalTLtoBR() ||
+            checkDiagonalTRtoBL;
     }
 }
 
