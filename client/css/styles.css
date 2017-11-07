@@ -1,0 +1,18 @@
+body {
+    text-align: center;
+}
+
+#gameboard {
+    display: inline-block;
+}
+
+.col {
+    width: 130px;
+    height: 130px;
+    display: inline-block;
+    background-color: white;
+
+    border-style: solid;
+    border-width: 5px;
+    margin: 5px;
+}
