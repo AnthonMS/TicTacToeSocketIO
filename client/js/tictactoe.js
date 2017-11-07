@@ -72,15 +72,6 @@ class Tictactoe
                     $emptyCell.data('col')
                 );
 
-                /*const winner = that.checkForWinner(
-                    $emptyCell.data('row'),
-                    $emptyCell.data('col'));
-                if (winner)
-                {
-                    alert(`Game Over! Player ${that.player} has won!`);
-                    return;
-                }*/
-
                 // If player variable is red, change it to black, or else change it to red.
                 that.player = (that.player === 'red') ? 'black' : 'red';
                 $(this).trigger('mouseenter');
@@ -114,21 +105,19 @@ class Tictactoe
                 let $checkCell2 = $getCell($cellClicked.data('row'), j);
                 if ($checkCell2.data('player') != that.player)
                 {
-                    console.log(`!hor/check: ${$cellClicked.data('row')}, ${j} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalHor: ${totalHor}`);
+                    //console.log(`!hor/check: ${$cellClicked.data('row')}, ${j} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalHor: ${totalHor}`);
                     return false;
                 } else {
                     totalHor++;
-                    console.log(`hor/check: ${$cellClicked.data('row')}, ${j} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalHor: ${totalHor}`);
+                    //console.log(`hor/check: ${$cellClicked.data('row')}, ${j} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalHor: ${totalHor}`);
                 }
             }
             return true;
         }
         if (checkHor() == true)
         {
-            //if (totalHor >= 3)
-            //{
             alert(`Game Over! ${that.player} player has won!`);
-            //}
+
         }
         // ----------------------------------------------------------
 
@@ -143,11 +132,11 @@ class Tictactoe
                 // if the data 'player' is the same as above or below data, add point to totalVer.
                 if ($checkCell.data('player') != that.player)
                 {
-                    console.log(`!ver/check: ${i}, ${$cellClicked.data('col')} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalVer: ${totalVer}`);
+                    //console.log(`!ver/check: ${i}, ${$cellClicked.data('col')} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalVer: ${totalVer}`);
                     return false;
                 } else {
                     totalVer++;
-                    console.log(`ver/check: ${i}, ${$cellClicked.data('col')} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalVer: ${totalVer}`);
+                    //console.log(`ver/check: ${i}, ${$cellClicked.data('col')} click: ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalVer: ${totalVer}`);
                 }
             }
             return true;
@@ -170,11 +159,11 @@ class Tictactoe
                 let $checkCell3 = $getCell(z, z); // goes through 0,0 1,1 2,2
                 if ($checkCell3.data('player') != that.player)
                 {
-                    console.log(`!dia/check: ${z}, ${z} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia: ${totalDia}`);
+                    //console.log(`!dia/check: ${z}, ${z} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia: ${totalDia}`);
                     return false;
                 } else {
                     totalDia++;
-                    console.log(`dia/check: ${z}, ${z} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia: ${totalDia}`);
+                    //console.log(`dia/check: ${z}, ${z} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia: ${totalDia}`);
                 }
             }
             return true;
@@ -196,11 +185,11 @@ class Tictactoe
                 //console.log(`${z}, ${x}`);
                 if ($checkCell4.data('player') != that.player)
                 {
-                    console.log(`!dia2/check: ${z}, ${x} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia2: ${totalDia2}`);
+                    //console.log(`!dia2/check: ${z}, ${x} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia2: ${totalDia2}`);
                     return false;
                 } else {
                     totalDia2++;
-                    console.log(`dia2/check: ${z}, ${x} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia2: ${totalDia2}`);
+                    //console.log(`dia2/check: ${z}, ${x} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia2: ${totalDia2}`);
                 }
                 x--;
             }
