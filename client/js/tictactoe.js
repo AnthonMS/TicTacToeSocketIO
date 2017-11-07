@@ -94,6 +94,8 @@ class Tictactoe
         const that = this;
         let totalVer = 0;
         let totalHor = 0;
+        let totalDia = 0;
+        let totalDia2 = 0;
         //console.log(playerColor);
 
         function $getCell(i, j)
@@ -129,7 +131,7 @@ class Tictactoe
             //}
         }
         // ----------------------------------------------------------
-        //console.log('hello testing');
+
         // CHECK VERTICAL
         // this for loop checks above and below (the rows), if the div data attr 'player'
         // is the same as the one who just put a piece down.
@@ -157,10 +159,58 @@ class Tictactoe
             alert(`Game Over! ${that.player} player has won!`);
             //}
         }
-
         // ----------------------------------------------------------
-        //console.log('hello testing2');
-        
+
+        // CHECK DIAGONAL TOP LEFT TO BOTTOM RIGHT
+        function checkDiaTLtoBR()
+        {
+            for (let z = 0; z < that.ROWS; z++)
+            {
+                // Go through the Rows of the gameboard grid
+                let $checkCell3 = $getCell(z, z); // goes through 0,0 1,1 2,2
+                if ($checkCell3.data('player') != that.player)
+                {
+                    console.log(`!dia/check: ${z}, ${z} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia: ${totalDia}`);
+                    return false;
+                } else {
+                    totalDia++;
+                    console.log(`dia/check: ${z}, ${z} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia: ${totalDia}`);
+                }
+            }
+            return true;
+        }
+        if (checkDiaTLtoBR() == true)
+        {
+            alert(`Game Over! ${that.player} player has won!`);
+        }
+        // ----------------------------------------------------------
+
+        // CHECK DIAGONAL TOP RIGHT TO BOTTOM LEFT
+        function checkDiaTRtoBL()
+        {
+            let z = 0;
+            let x = that.COLS - 1; // = 2
+            for (z; z < that.ROWS; z++)
+            {
+                let $checkCell4 = $getCell(z, x);
+                //console.log(`${z}, ${x}`);
+                if ($checkCell4.data('player') != that.player)
+                {
+                    console.log(`!dia2/check: ${z}, ${x} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia2: ${totalDia2}`);
+                    return false;
+                } else {
+                    totalDia2++;
+                    console.log(`dia2/check: ${z}, ${x} click ${$cellClicked.data('row')}, ${$cellClicked.data('col')} totalDia2: ${totalDia2}`);
+                }
+                x--;
+            }
+            return true;
+        }
+        if (checkDiaTRtoBL() == true)
+        {
+            alert(`Game Over! ${that.player} player has won!`);
+        }
+        // ----------------------------------------------------------
     }
 
 
