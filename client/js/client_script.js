@@ -2,6 +2,6 @@
 
 $(document).ready(function () {
     //console.log('Jquery Working');
-    // TODO draw a 3by3 grid
+    // create tictactoe game that draws the Grid
     const tictactoe = new Tictactoe('#gameboard');
 });
