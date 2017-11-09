@@ -1,8 +1,21 @@
 //var socket = io.connect('http://localhost:4000');
 
 $(document).ready(function () {
-    //console.log('Jquery Working');
-    // create tictactoe game that draws the Grid
-    const tictactoe = new Tictactoe('#gameboard');
-    //console.log(tictactoe.player);
+    const $userlist = $('#userlist');
+     var nameArray = new Array();
+     //nameArray.push('Test Array Name');
+     //const $listItem = ('<li>' + nameArray[0] + '</li>');
+     //$userlist.append($listItem);
 });
+
+
+function setupEventListeners()
+{
+
+}
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+#index_container {
+
+}
+
+#index_title {
+    text-align: center;
+    color: green;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+
+#userlist_container {
+    float: left;
+    margin-left: 5%;
+    border: 1px solid black;
+    padding-right: 20px;
+}
+
+#userlist {
+    list-style: none;
+}
+
+#userlist li {
+    margin: 5px;
+}
+
+#userlist li:hover {
+    background-color: lightgrey;
+}
+
+#login_container {
+    text-align: center;
+    float: right;
+}
+
+#name_input {
+    width: 150px;
+    height: 35px;
+    margin-left: 25px;
+    margin-top: 5px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+#login_btn {
+    margin-top: 15px;
+    height: 30px;
+    background: #e8491d;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+    float: right;
+}
+#login_btn:hover {
+    background: grey;
+    cursor: pointer;
+}

@@ -16,4 +16,8 @@ var io = socket(server);
 io.on('connection', function(socket){
     console.log('Made socket connection', socket.id);
 
+    socket.on('colorchange', function(data) {
+        //console.log('Got Color Change request ', data)
+        io.sockets.emit('colorchange', data);
+    })
 });
