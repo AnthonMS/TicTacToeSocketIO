@@ -12,9 +12,9 @@
 
 #userlist_container {
     float: left;
-    margin-left: 5%;
+    margin-left: 10px;
     border: 1px solid black;
-    padding-right: 20px;
+    padding-right: 40px;
 }
 
 #userlist {
@@ -25,13 +25,19 @@
     margin: 5px;
 }
 
+.marked_listitem {
+    background-color: deepskyblue;
+}
+
 #userlist li:hover {
     background-color: lightgrey;
+    cursor: pointer;
 }
 
 #login_container {
     text-align: center;
     float: right;
+    margin-right: 10px;
 }
 
 #name_input {
@@ -56,4 +62,15 @@
 #login_btn:hover {
     background: grey;
     cursor: pointer;
+}
+
+#login_btn_clicked {
+    margin-top: 15px;
+    height: 30px;
+    background: grey;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+    float: right;
 }
