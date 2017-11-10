@@ -50,12 +50,26 @@ io.on('connection', function(socket){
     });
 
     socket.on('challenge', function(data) {
-        console.log(data);
+        //console.log(data);
         socket.broadcast.to(data.challengedid).emit('challenged', data);
     });
 
     socket.on('accept_challenge', function(data) {
+        //console.log(data);
+        // Send data to guy accepting challenge
+        //socket.emit('accept_challenge', data);
+        socket.emit('you_accept_challenge', {
+            opponame: data.challenger,
+            oppoid: data.challengerid,
+            username: data.challenged,
+            userid: data.challengedid
+        });
+
+    });
+
+    socket.on('startgame', function (data) {
         console.log(data);
+        socket.broadcast.to(data.userid).emit('other_accept_challenge', data);
     });
 
 });

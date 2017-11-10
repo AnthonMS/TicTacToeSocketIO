@@ -13,16 +13,9 @@ $(document).ready(function () {
 
     setupEventListeners();
 
-    /*testname = "Testorino";
-    testid = "testidasdftg234-23gg";
-    var date = new Date();
-    var time = date.toLocaleTimeString();
+    //$("#middlesection").html('');
+    //drawChallengeSection();
 
-    const $tablerow = (`<tr id="name_${testname}"><td class="namecol">${testname}</td><td id='timer_${testname}'>60</td><td><div><p class='a'>Accept</p><p>/</p><p class='d'>Deny</p></div></td></tr>`);
-    $('#requestlist').append($tablerow);
-
-    time = date.getTime() + 1*60*1000; // add 1 min
-    setCountDown(testname, time);*/
 });
 
 
@@ -104,7 +97,6 @@ function setupEventListeners()
         const $nametable = $(this).parent().parent().parent();
         const $name1 = $nametable.find('.namecol');
         var challName = $name1.html();
-        //console.log(challName);
         let oppName, oppId;
 
         for (let i = 0; i < nameArray.length; i++)
@@ -117,11 +109,11 @@ function setupEventListeners()
                 oppId = idArray[i];
             }
         }
-        console.log(oppName + ' ' + oppId);
+        //console.log(oppName + ' ' + oppId);
 
         if (oppName || oppId)
         {
-            alert("Successfully accepted match and found opponent");
+            //alert("Successfully accepted match and found opponent");
             socket.emit('accept_challenge', {
                 challenger: oppName,
                 challengerid: oppId,
@@ -175,7 +167,7 @@ socket.on('splicearrays', function (data) {
 });
 
 socket.on('challenged', function (data) {
-    const $tablerow = (`<tr id="name_${data.challenger}"><td>${data.challenger}</td><td id='timer_${data.challenger}'>60</td><td><div><p class='a'>Accept</p><p>/</p><p class='d'>Deny</p></div></td></tr>`);
+    const $tablerow = (`<tr id="name_${data.challenger}"><td class="namecol">${data.challenger}</td><td id='timer_${data.challenger}'>60</td><td><div><p class='a'>Accept</p><p>/</p><p class='d'>Deny</p></div></td></tr>`);
     //const $tablerow = ('<tr><td>' + data.challenger + '</td><td class="challenge_timer">30</td><td><div><p class="a">Accept</p><p>/</p><p class="d">Deny</p></div></td></tr>');
     $('#requestlist').append($tablerow);
 
@@ -209,6 +201,47 @@ function setCountDown(name, time)
     }
 
 }
+
+socket.on('you_accept_challenge', function (data) {
+    //console.log(data);
+    $("#middlesection").html('');
+    const tictactoe = new Tictactoe_online(data.opponame, data.oppoid, data.username, data.userid, 1);
+    console.log('Coppo', data.opponame);
+    console.log('Coppoid', data.oppoid);
+    console.log('Cusername', data.username);
+    console.log('Cuserid', data.userid);
+});
+
+socket.on('other_accept_challenge', function (data) {
+    $("#middlesection").html('');
+    const tictactoe = new Tictactoe_online(data.opponame, data.oppoid, data.username, data.userid, 2);
+    console.log('Coppo', data.opponame);
+    console.log('Coppoid', data.oppoid);
+    console.log('Cusername', data.username);
+    console.log('Cuserid', data.userid);
+});
+
+function drawChallengeSection()
+{
+    const $middle_section = $('#middlesection');
+    const $title = ('<h3><u>Opponent</u></h3>');
+    const $oppo = ('<p id="oppo">Noone Selected</p>');
+    const $button = ('<button id="challenge_btn" class="btn_grey">Challenge</button>');
+    const $requesttable = ('<div id="requestlist_container">\n' +
+        '            <table id="requestlist">\n' +
+        '                <tr>\n' +
+        '                    <th>Challenger</th>\n' +
+        '                    <th>Timer</th>\n' +
+        '                    <th>Accept/Deny</th>\n' +
+        '                </tr>\n' +
+        '            </table>\n' +
+        '        </div>');
+    $middle_section.append($title);
+    $middle_section.append($oppo);
+    $middle_section.append($button);
+    $middle_section.append($requesttable);
+}
+
 
 
 
