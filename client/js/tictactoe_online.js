@@ -140,6 +140,28 @@ class Tictactoe_online
             $('#index_title h1').html(`${color} has won!`);
         }
 
+        function checkDiaTRtoBL()
+        {
+            let z = 0;
+            let x = that.COLS - 1; // = 2
+            for (z; z < that.ROWS; z++)
+            {
+                let $checkCell = $getCell(z, x);
+                if ($checkCell.data('player') != color)
+                {
+                    // return false;
+                } else {
+                    totalDia2++;
+                }
+                x--;
+            }
+            return totalDia2;
+        }
+        if (checkDiaTRtoBL() >= 3)
+        {
+            $('#index_title h1').html(`${color} has won!`);
+        }
+
     }
 
 
