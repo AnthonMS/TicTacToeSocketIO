@@ -48,4 +48,40 @@ io.on('connection', function(socket){
             }
         }
     });
+
+    socket.on('challenge', function(data) {
+        console.log(data);
+        socket.broadcast.to(data.challengedid).emit('challenged', data);
+    });
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
