@@ -3,21 +3,17 @@ var gOppoName = '';
 var gOppoId = '';
 var gUsername = '';
 var gUserId = '';
+var gplayer = '';
+var gActiveUser;
 
 class Tictactoe_online
 {
 
     constructor(oppo, oppoid, username, userid, ifelse)
     {
-        //this.socket = io.connect('http://localhost:4000');
-        /*socket.emit('newuser', {
-            name: $input_name.val(),
-            id: socket.id
-        });*/
-
+        const that = this;
         this.ROWS = 3;
         this.COLS = 3;
-        this.player = '';
         this.opponame = oppo;
         this.oppoid = oppoid;
         this.username = username;
@@ -38,15 +34,114 @@ class Tictactoe_online
                 opponame: this.username,
                 oppoid: this.userid
             });
+            gplayer = 'red';
+            gActiveUser = true;
         } else {
             // Else if 2 then you send the new userid to opponent
             //console.log('test2', socket.id);
+            gplayer = 'black';
+            gActiveUser = false;
         }
 
         this.createGrid();
         this.setupEventListeners();
 
+        socket.on('colclick_deactivate', function (data) {
+            //console.log(data);
+            let $checkCell = $getCell(data.row, data.col);
+            //console.log($checkCell);
+            $checkCell.removeClass(`empty hover-${data.color}`);
+            $checkCell.addClass(data.color);
+            $checkCell.attr('data-player', data.color);
+            gActiveUser = false;
+
+            that.checkForWinner(data.row, data.col, data.color);
+
+        });
+        socket.on('colclick_activate', function (data) {
+            //console.log(data);
+            let $checkCell = $getCell(data.row, data.col);
+            //console.log($checkCell);
+            $checkCell.removeClass(`empty hover-${data.color}`);
+            $checkCell.addClass(data.color);
+            $checkCell.attr('data-player', data.color);
+            gActiveUser = true;
+
+            that.checkForWinner(data.row, data.col, data.color);
+        });
+
     }
+
+    checkForWinner(row, col, color)
+    {
+        const that = this;
+        let totalVer = 0;
+        let totalHor = 0;
+        let totalDia = 0;
+        let totalDia2 = 0;
+
+        let $cellClicked = $getCell(row, col);
+
+        function checkHor()
+        {
+            for (let j = 0; j < that.COLS; j++)
+            {
+                let $checkCell = $getCell($cellClicked.data('row'), j);
+                if ($checkCell.data('player') != color)
+                {
+                    //return false;
+                } else {
+                    totalHor++;
+                }
+            }
+            return totalHor;
+        }
+        if (checkHor() >=3)
+        {
+            //alert(`Game Over! ${color} has won!`);
+            $('#index_title h1').html(`${color} has won!`);
+        }
+
+        function checkVer()
+        {
+            for (let i = 0; i < that.ROWS; i++)
+            {
+                let $checkCell = $getCell(i, $cellClicked.data('col'));
+                if ($checkCell.data('player') != color)
+                {
+                    //return false;
+                } else {
+                    totalVer++;
+                }
+            }
+            return totalVer;
+        }
+        if (checkVer() >= 3)
+        {
+            $('#index_title h1').html(`${color} has won!`);
+        }
+
+        function checkDiaTLtoBR()
+        {
+            for (let z = 0; z < that.ROWS; z++)
+            {
+                let $checkCell = $getCell(z, z);
+                if ($checkCell.data('player') != color)
+                {
+                    // return false;
+                } else {
+                    totalDia++;
+                }
+            }
+            return totalDia;
+        }
+        if (checkDiaTLtoBR() >= 3)
+        {
+            $('#index_title h1').html(`${color} has won!`);
+        }
+
+    }
+
 
     createGrid()
     {
@@ -66,10 +161,10 @@ class Tictactoe_online
             }
             $board.append($row);
         }
-        console.log('myname', gUsername);
+        /*console.log('myname', gUsername);
         console.log('myuserid', gUserId);
         console.log('myoppo', gOppoName);
-        console.log('myoppoid', gOppoId);
+        console.log('myoppoid', gOppoId);*/
     }
 
     setupEventListeners()
@@ -86,37 +181,40 @@ class Tictactoe_online
             if ($(this).hasClass('empty'))
             {
                 // If it is empty, we will change it to hover-(color) (Where the color is the player)
-                $(this).addClass(`hover-red`);
+                $(this).addClass(`hover-${gplayer}`);
             }
         });
 
         // checks if the mouse leaves any item with class col, if so function is called
         $container.on('mouseleave', '.col', function () {
-            $('.col').removeClass(`hover-red`);
+            $('.col').removeClass(`hover-${gplayer}`);
         });
 
-        $container.on('click', '.col', function () {
-            //$(this).removeClass(`empty hover-red`);
-            //$(this).addClass('red');
-            console.log('myname', gUsername);
-            console.log('myuserid', gUserId);
-            console.log('myoppo', gOppoName);
-            console.log('myoppoid', gOppoId);
-
+        $container.on('click', '.col.empty', function () {
             const col = $(this).data('col');
             const row = $(this).data('row');
-            const id = this.oppoid
 
-            socket.emit('colclick', {
-                col: col,
-                id: gOppoId,
-                row: row
-            });
+            if (gActiveUser == true)
+            {
+                socket.emit('colclick', {
+                    col: col,
+                    row: row,
+                    id: gOppoId,
+                    color: gplayer
+                });
+            } else {
+                // Not this clients turn turn
+            }
         });
     }
-
-
 }
+
+function $getCell(i, j)
+{
+    return $(`.col[data-row='${i}'][data-col='${j}']`);
+}
+
+
 
 
 

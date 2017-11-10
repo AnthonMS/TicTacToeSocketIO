@@ -74,6 +74,8 @@ io.on('connection', function(socket){
 
     socket.on('colclick', function (data) {
         console.log(data);
+        socket.broadcast.to(data.id).emit('colclick_activate', data);
+        socket.emit('colclick_deactivate', data);
     });
 
 });
