@@ -85,6 +85,7 @@ body {
     padding-right: 10px;
     color: #ffffff;
     float: right;
+    border-radius: 10px;
 }
 
 #middlesection {
@@ -103,7 +104,7 @@ body {
     text-align: center;
 }
 
-#middlesection button {
+.btn_active {
     background: #e8491d;
     border: 1px solid black;
     padding-left: 15px;
@@ -115,9 +116,21 @@ body {
     border-radius: 10px;
 }
 
-#middlesection button:hover {
+.btn_active:hover {
     background: blue;
     cursor: pointer;
+}
+
+.btn_grey {
+    background: grey;
+    border: 1px solid black;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 #requestlist_container {

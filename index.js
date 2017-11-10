@@ -54,6 +54,10 @@ io.on('connection', function(socket){
         socket.broadcast.to(data.challengedid).emit('challenged', data);
     });
 
+    socket.on('accept_challenge', function(data) {
+        console.log(data);
+    });
+
 });
 
 

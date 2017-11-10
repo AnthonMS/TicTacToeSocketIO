@@ -3,6 +3,7 @@ var $userlist = null;
 var username, markedUser, markedUserID;
 var nameArray = new Array();
 var idArray = new Array();
+var testname, testid;
 
 $(document).ready(function () {
     $userlist = $('#userlist');
@@ -12,15 +13,16 @@ $(document).ready(function () {
 
     setupEventListeners();
 
-    //var name = "Testorino";
-    //var date = new Date();
-    //var time = date.toLocaleTimeString();
+    /*testname = "Testorino";
+    testid = "testidasdftg234-23gg";
+    var date = new Date();
+    var time = date.toLocaleTimeString();
 
-    //const $tablerow = (`<tr id="name_${name}"><td>${name}</td><td id='timer_${name}'>60</td><td><div><p class='a'>Accept</p><p>/</p><p class='d'>Deny</p></div></td></tr>`);
-    //$('#requestlist').append($tablerow);
+    const $tablerow = (`<tr id="name_${testname}"><td class="namecol">${testname}</td><td id='timer_${testname}'>60</td><td><div><p class='a'>Accept</p><p>/</p><p class='d'>Deny</p></div></td></tr>`);
+    $('#requestlist').append($tablerow);
 
-    //time = date.getTime() + 1*60*1000; // add 1 min
-    //setCountDown(name, time, $tablerow);
+    time = date.getTime() + 1*60*1000; // add 1 min
+    setCountDown(testname, time);*/
 });
 
 
@@ -29,10 +31,16 @@ function setupEventListeners()
     const $container = $("#index_container");
     const that = this;
 
+    //-------------------------- USER TITLE CLIICKED -----------------------------------------------
     $container.on('click', '#userlist b', function () {
         $('#userlist li').attr('class', '');
+        markedUserID = '';
+        markedUser = '';
+        $("#oppo").html('Noone selected');
     });
+    //-----------------------------------------------------------------------------------------------
 
+    //-------------------------- LOGIN BUTTON CLIICKED -----------------------------------------------
     $container.on('click', '#login_btn', function () {
         // Get name input field
         const $input_name = $('#name_input');
@@ -48,11 +56,13 @@ function setupEventListeners()
                 name: $input_name.val(),
                 id: socket.id
             });
-
             $(this).attr('id', 'login_btn_clicked');
+            $('#challenge_btn').attr('class', 'btn_active');
         }
     });
+    //-----------------------------------------------------------------------------------------------
 
+    //-------------------------- USER CLIICKED --------------------------------------------------------
     $container.on('click', '#userlist li', function ()
     {
         if ($(this).data('name') != username)
@@ -61,24 +71,75 @@ function setupEventListeners()
             $(this).attr('class', 'marked_listitem');
             markedUser = $(this).data('name');
             markedUserID = $(this).data('id');
-            console.log(markedUserID);
-
+            //console.log(markedUserID);
             $("#oppo").html(markedUser);
         }
     });
+    //-----------------------------------------------------------------------------------------------
 
+    //-------------------------- CHALLENGE BUTTON CLIICKED -----------------------------------------------
     $container.on('click', '#challenge_btn', function () {
         if (markedUser != "")
         {
             // Marked user is not empty
-            socket.emit('challenge', {
-                challenger: username,
-                challengerid: socket.id,
-                challenged: markedUser,
-                challengedid: markedUserID
-            });
+            if ($(this).hasClass('btn_active'))
+            {
+                socket.emit('challenge', {
+                    challenger: username,
+                    challengerid: socket.id,
+                    challenged: markedUser,
+                    challengedid: markedUserID
+                });
+            } else {
+                // not on the line
+                $("#oppo").html('Please enter your name >>>>');
+            }
         }
     });
+    //-----------------------------------------------------------------------------------------------
+
+    //-------------------------- ACCEPT BUTTON CLIICKED -------------------------------------
+    $container.on('click', 'tr td .a', function () {
+
+        const $nametable = $(this).parent().parent().parent();
+        const $name1 = $nametable.find('.namecol');
+        var challName = $name1.html();
+        //console.log(challName);
+        let oppName, oppId;
+
+        for (let i = 0; i < nameArray.length; i++)
+        {
+            //console.log(nameArray[i] + ' ' + challName + ' ' + idArray[i]);
+            if (nameArray[i] === challName)
+            {
+                //console.log("USER FOUND!");
+                oppName = nameArray[i];
+                oppId = idArray[i];
+            }
+        }
+        console.log(oppName + ' ' + oppId);
+
+        if (oppName || oppId)
+        {
+            alert("Successfully accepted match and found opponent");
+            socket.emit('accept_challenge', {
+                challenger: oppName,
+                challengerid: oppId,
+                challenged: username,
+                challengedid: socket.id
+            });
+        } else {
+            alert("Something went wrong, Couldn't find the player you accepted the challenge from...");
+        }
+    });
+    //-----------------------------------------------------------------------------------------------
+
+    //-------------------------- DENY BUTTON CLIICKED -----------------------------------------------
+    $container.on('click', 'tr td .d', function () {
+        $(this).parent().parent().parent().remove();
+    });
+    //-----------------------------------------------------------------------------------------------
+
 }
 
 socket.on('newuser', function(data) {
@@ -94,10 +155,6 @@ socket.on('getarrays', function (data) {
     idArray = data.idarray;
 
     populateUsers();
-
-    //console.log(data.namearray);
-    //console.log(data.idarray);
-
 });
 
 function populateUsers()
@@ -118,9 +175,6 @@ socket.on('splicearrays', function (data) {
 });
 
 socket.on('challenged', function (data) {
-    console.log(data);
-
-
     const $tablerow = (`<tr id="name_${data.challenger}"><td>${data.challenger}</td><td id='timer_${data.challenger}'>60</td><td><div><p class='a'>Accept</p><p>/</p><p class='d'>Deny</p></div></td></tr>`);
     //const $tablerow = ('<tr><td>' + data.challenger + '</td><td class="challenge_timer">30</td><td><div><p class="a">Accept</p><p>/</p><p class="d">Deny</p></div></td></tr>');
     $('#requestlist').append($tablerow);
@@ -138,11 +192,6 @@ function setCountDown(name, time)
     let i = 60;
     var counter = setInterval(function () {
         i--;
-        console.log(i + " remaining");
-
-        //const $tablerow = (`<tr><td>${name}</td><td id='timer_${name}'>${i}</td><td><div><p class='a'>Accept</p><p>/</p><p class='d'>Deny</p></div></td></tr>`);
-        //$('#requestlist').append($tablerow);
-        //$(tablerow).text($tablerow);
 
         $(`#timer_${name}`).html(i).addClass('red_background');
 
@@ -152,11 +201,13 @@ function setCountDown(name, time)
         }
     }, 1000);
 
+
     function stopCounter() {
         clearInterval(counter);
-        console.log("1 minute has passed! Counter should stop");
-        $(`#name_${name}`).html('');
+        //console.log("1 minute has passed! Counter should stop");
+        $(`#name_${name}`).remove();
     }
+
 }
 
 
