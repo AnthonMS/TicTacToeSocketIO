@@ -19,6 +19,10 @@ function setupEventListeners()
     const $container = $("#index_container");
     const that = this;
 
+    $container.on('click', '#userlist b', function () {
+        $('#userlist li').attr('class', '');
+    });
+
     $container.on('click', '#login_btn', function () {
         // Get name input field
         const $input_name = $('#name_input');
@@ -41,10 +45,12 @@ function setupEventListeners()
 
     $container.on('click', '#userlist li', function ()
     {
-        $('#userlist li').attr('class', '');
-        $(this).attr('class', 'marked_listitem');
-        markedUser = $(this).data('name');
-        console.log(markedUser);
+        if ($(this).data('name') != username)
+        {
+            $('#userlist li').attr('class', '');
+            $(this).attr('class', 'marked_listitem');
+            markedUser = $(this).data('name');
+        }
     });
 }
 

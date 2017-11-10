@@ -1,3 +1,7 @@
+body {
+    background-image: url("../img/stonehaven.png");
+}
+
 #index_container {
 
 }
@@ -15,10 +19,13 @@
     margin-left: 10px;
     border: 1px solid black;
     padding-right: 40px;
+    overflow: hidden;
+    background-color: white;
 }
 
 #userlist {
     list-style: none;
+    overflow: hidden;
 }
 
 #userlist li {
@@ -38,6 +45,7 @@
     text-align: center;
     float: right;
     margin-right: 10px;
+    overflow: hidden;
 }
 
 #name_input {
@@ -58,9 +66,10 @@
     padding-right: 10px;
     color: #ffffff;
     float: right;
+    border-radius: 10px;
 }
 #login_btn:hover {
-    background: grey;
+    background: blue;
     cursor: pointer;
 }
 
@@ -73,4 +82,62 @@
     padding-right: 10px;
     color: #ffffff;
     float: right;
+}
+
+#middlesection {
+    text-align: center;
+    overflow: hidden;
+}
+#middlesection h3 {
+    color: red;
+    font-size: 28px;
+}
+#middlesection p {
+    color: red;
+    margin-top: -15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#middlesection button {
+    background: #e8491d;
+    border: 1px solid black;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+#middlesection button:hover {
+    background: blue;
+    cursor: pointer;
+}
+
+#requestlist_container {
+
+}
+
+#requestlist {
+    width: 100%;
+}
+
+#requestlist, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#requestlist th {
+    background-color: #cccccc;
+    padding: 5px;
+    text-align: left;
+
+}
+
+#requestlist td {
+    background-color: #eaeaea;
+    padding: 5px;
+    text-align: left;
 }

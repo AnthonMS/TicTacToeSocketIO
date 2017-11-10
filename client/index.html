@@ -8,7 +8,7 @@
     <link href="css/index_styles.css" rel="stylesheet"/>
     <script src="js/client_script.js"></script>
 </head>
-<body>
+<body id="index_body">
 
 <div id="index_container">
     <div id="index_title">
@@ -16,13 +16,36 @@
     </div>
     <div id="userlist_container">
         <ul id="userlist">
-            <b>Users Online:</b>
+            <b><u>Users Online</u></b>
         </ul>
     </div>
 
     <div id="login_container">
         <input type="text" id="name_input" placeholder="Alias"><br>
         <button id="login_btn">Go Online</button>
+    </div>
+
+    <div id="middlesection">
+        <h3><u>Opponent</u></h3>
+        <p>Name of opponent</p>
+        <button id="challenge_btn">Challenge</button>
+        <button id="accept_btn">Accept</button>
+
+        <div id="requestlist_container">
+            <table id="requestlist">
+                <tr>
+                    <th>Header 1</th>
+                    <th>Header 2</th>
+                    <th>Header 3</th>
+                </tr>
+                <tr>
+                    <td>Table 1</td>
+                    <td>Table 2</td>
+                    <td>Table 3</td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 
 </div>
