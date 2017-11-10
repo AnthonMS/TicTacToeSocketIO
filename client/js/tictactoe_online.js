@@ -36,11 +36,17 @@ class Tictactoe_online
             });
             gplayer = 'red';
             gActiveUser = true;
+
+            $('#opponent').html(gOppoName);
+            $('#yourturn').html('Your Turn');
         } else {
             // Else if 2 then you send the new userid to opponent
             //console.log('test2', socket.id);
             gplayer = 'black';
             gActiveUser = false;
+
+            $('#opponent').html(gOppoName);
+            $('#yourturn').html(`${gOppoName}'s Turn`);
         }
 
         this.createGrid();
@@ -55,6 +61,8 @@ class Tictactoe_online
             $checkCell.attr('data-player', data.color);
             gActiveUser = false;
 
+            $('#yourturn').html(`${gOppoName}'s Turn`);
+
             that.checkForWinner(data.row, data.col, data.color);
 
         });
@@ -66,6 +74,8 @@ class Tictactoe_online
             $checkCell.addClass(data.color);
             $checkCell.attr('data-player', data.color);
             gActiveUser = true;
+
+            $('#yourturn').html(`Your Turn`);
 
             that.checkForWinner(data.row, data.col, data.color);
         });
@@ -183,10 +193,6 @@ class Tictactoe_online
             }
             $board.append($row);
         }
-        /*console.log('myname', gUsername);
-        console.log('myuserid', gUserId);
-        console.log('myoppo', gOppoName);
-        console.log('myoppoid', gOppoId);*/
     }
 
     setupEventListeners()

@@ -19,16 +19,75 @@ body {
 
 .hover-red {
     background-color: rgba(255, 0, 0, 0.2);
+    background-image: url("../img/smallXone.png");
+
 }
 
 .hover-black {
     background-color: rgba(0, 0, 0, 0.2);
+    background-image: url("../img/smallOone.png");
 }
 
 .col.red {
-    background-color: red;
+    background-image: url("../img/smallXone.png");
 }
 
 .col.black {
-    background-color: black;
+    background-image: url("../img/smallOone.png");
+}
+
+#gameinfo {
+    padding: 0;
+    margin: 10px 0 0 0; /*top, right, bottom, left*/
+    font-weight: bold;
+}
+
+#opponent {
+    font-size: 22px;
+    color: orange;
+    padding: 0;
+    margin: 10px 0 0 0; /*top, right, bottom, left*/
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+#yourturn {
+    font-size: 18px;
+    color: orangered;
+    padding: 0 0 10px 0;
+    margin: 5px 0 0 0; /*top, right, bottom, left*/
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+#wininfo {
+    font-size: 25px;
+    color: green;
+    padding: 0 0 10px 0; /*top, right, bottom, left*/
+    margin: 10px 0 0 0; /*top, right, bottom, left*/
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#exitmatch_btn {
+    height: 30px;
+    background: #e8491d;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 0 10px 0; /*top, right, bottom, left*/
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+#exitmatch_btn:hover {
+    background: blue;
+    cursor: pointer;
+}
+
+#exitmatch_btn_notactive {
+    height: 0px;
+    border: 0;
+    background: white;
+    color: white;
 }
