@@ -206,19 +206,19 @@ socket.on('you_accept_challenge', function (data) {
     //console.log(data);
     $("#middlesection").html('');
     const tictactoe = new Tictactoe_online(data.opponame, data.oppoid, data.username, data.userid, 1);
-    console.log('Coppo', data.opponame);
+    /*console.log('Coppo', data.opponame);
     console.log('Coppoid', data.oppoid);
     console.log('Cusername', data.username);
-    console.log('Cuserid', data.userid);
+    console.log('Cuserid', data.userid);*/
 });
 
 socket.on('other_accept_challenge', function (data) {
     $("#middlesection").html('');
     const tictactoe = new Tictactoe_online(data.opponame, data.oppoid, data.username, data.userid, 2);
-    console.log('Coppo', data.opponame);
+    /*console.log('Coppo', data.opponame);
     console.log('Coppoid', data.oppoid);
     console.log('Cusername', data.username);
-    console.log('Cuserid', data.userid);
+    console.log('Cuserid', data.userid);*/
 });
 
 function drawChallengeSection()

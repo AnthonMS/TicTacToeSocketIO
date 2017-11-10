@@ -1,9 +1,15 @@
+var socket  = io.connect('http://localhost:4000');
+var gOppoName = '';
+var gOppoId = '';
+var gUsername = '';
+var gUserId = '';
+
 class Tictactoe_online
 {
 
     constructor(oppo, oppoid, username, userid, ifelse)
     {
-        this.socket = io.connect('http://localhost:4000');
+        //this.socket = io.connect('http://localhost:4000');
         /*socket.emit('newuser', {
             name: $input_name.val(),
             id: socket.id
@@ -17,19 +23,15 @@ class Tictactoe_online
         this.username = username;
         this.userid = userid;
 
-        console.log('Tmyname', username);
-        console.log('Tmysocket', socket.id);
-        console.log('Tmyuserid', userid);
-        console.log('Tmyoppo', oppo);
-        console.log('Tmyoppo', oppoid);
-
-        this.createGrid();
-        this.setupEventListeners();
+        gOppoName = oppo;
+        gOppoId = oppoid;
+        gUsername = username;
+        gUserId = userid;
 
         if (ifelse == 1)
         {
             // Then you have to send information to oppenent, that you accepted match.
-            console.log('test1', socket.id);
+            //console.log('test1', socket.id);
             socket.emit('startgame', {
                 userid: this.oppoid,
                 username: this.opponame,
@@ -38,12 +40,11 @@ class Tictactoe_online
             });
         } else {
             // Else if 2 then you send the new userid to opponent
-            console.log('test2', socket.id);
-            socket.emit('newoppoid', {
-                userid: this.userid,
-                oppoid: this.oppoid
-            })
+            //console.log('test2', socket.id);
         }
+
+        this.createGrid();
+        this.setupEventListeners();
 
     }
 
@@ -65,7 +66,10 @@ class Tictactoe_online
             }
             $board.append($row);
         }
-        //console.log($board.html());
+        console.log('myname', gUsername);
+        console.log('myuserid', gUserId);
+        console.log('myoppo', gOppoName);
+        console.log('myoppoid', gOppoId);
     }
 
     setupEventListeners()
@@ -89,6 +93,25 @@ class Tictactoe_online
         // checks if the mouse leaves any item with class col, if so function is called
         $container.on('mouseleave', '.col', function () {
             $('.col').removeClass(`hover-red`);
+        });
+
+        $container.on('click', '.col', function () {
+            //$(this).removeClass(`empty hover-red`);
+            //$(this).addClass('red');
+            console.log('myname', gUsername);
+            console.log('myuserid', gUserId);
+            console.log('myoppo', gOppoName);
+            console.log('myoppoid', gOppoId);
+
+            const col = $(this).data('col');
+            const row = $(this).data('row');
+            const id = this.oppoid
+
+            socket.emit('colclick', {
+                col: col,
+                id: gOppoId,
+                row: row
+            });
         });
     }
 

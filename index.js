@@ -68,8 +68,12 @@ io.on('connection', function(socket){
     });
 
     socket.on('startgame', function (data) {
-        console.log(data);
+        //console.log(data);
         socket.broadcast.to(data.userid).emit('other_accept_challenge', data);
+    });
+
+    socket.on('colclick', function (data) {
+        console.log(data);
     });
 
 });
