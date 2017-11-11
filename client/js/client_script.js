@@ -3,7 +3,7 @@ var $userlist = null;
 var username, markedUser, markedUserID;
 var nameArray = new Array();
 var idArray = new Array();
-var testname, testid;
+var opentab1, opentab2;
 
 class Client_script
 {
@@ -35,8 +35,9 @@ $(document).ready(function () {
 
     setupEventListeners();
 
-    //$("#middlesection").html('');
-    //drawChallengeSection();
+    const $container = $("#index_container");
+    changeStylingOnResize($container);
+    changeStylingOnResize2($container);
 
 });
 
@@ -157,6 +158,32 @@ function setupEventListeners()
     });
     //-----------------------------------------------------------------------------------------------
 
+    $container.on('click', '#openInfoTab', function () {
+        console.log($(this).parent());
+        //$(this).parent().maxWidth(220);
+        changeStylingOnClick(opentab1);
+    });
+
+    $container.on('click', '#info_container', function () {
+        if ($container.width() <= 750)
+        {
+            //changeStylingOnResize($container)
+
+        }
+    });
+
+    $container.on('click', '#openUserTab', function () {
+        changeStylingOnClick2(opentab2);
+    });
+
+    //$container.on('click')
+
+    $(window).on('resize', function () {
+        //console.log('resize:', $container.width())
+        changeStylingOnResize($container);
+        changeStylingOnResize2($container);
+    });
+
 }
 
 socket.on('newuser', function(data) {
@@ -272,6 +299,108 @@ function createMiddlesection()
     $('#exitmatch_btn').attr('id', 'exitmatch_btn_notactive');
 
 
+}
+
+function changeStylingOnResize(selector) {
+    if (selector.width() <= 750)
+    {
+        opentab1 = 0;
+        $('#right_container').css('max-width', '20px');
+        $('#right_container').css('border', 'dotted 1px black');
+        $('#login_container').css('max-width', '0px');
+        $('#login_container').css('max-height', '0px');
+        $('#info_container').css('max-width', '0px');
+        $('#info_container').css('max-height', '0px');
+        $('#openInfoTab').css('height', '200px');
+    } else {
+        opentab1 = 1;
+        $('#right_container').css('max-width', '220px');
+        $('#right_container').css('border', 'solid 1px black');
+        $('#login_container').css('max-width', '');
+        $('#login_container').css('max-height', '');
+        $('#info_container').css('max-width', '');
+        $('#info_container').css('max-height', '');
+        $('#openInfoTab').css('height', '0px');
+    }
+}
+
+function changeStylingOnResize2(selector) {
+    if (selector.width() <= 750)
+    {
+        opentab2 = 0;
+        $('#userlist_container').css('max-width', '20px');
+        $('#userlist_container').css('padding', '0');
+        $('#userlist_container').css('border', 'dotted 1px black');
+        $('#userlist').css('max-width', '0px');
+        $('#userlist').css('max-height', '0px');
+        $('#openUserTab').css('height', '165px');
+    } else {
+        opentab2 = 1;
+        $('#userlist_container').css('max-width', '220px');
+        $('#userlist_container').css('padding-right', '40px');
+        $('#userlist_container').css('border', 'black 1px black');
+        $('#userlist').css('max-width', '');
+        $('#userlist').css('max-height', '');
+        $('#openUserTab').css('height', '0px');
+    }
+}
+
+function changeStylingOnClick(openOrNot)
+{
+    if (openOrNot == 0)
+    {
+        // not open
+        console.log("not open");
+        opentab1 = 1;
+
+        $('#right_container').css('max-width', '220px');
+        $('#right_container').css('border', 'solid 1px black');
+        $('#login_container').css('max-width', '');
+        $('#login_container').css('max-height', '');
+        $('#info_container').css('max-width', '');
+        $('#info_container').css('max-height', '');
+        $('#openInfoTab').css('height', '30px');
+    } else
+    {
+        // Open
+        console.log("open");
+        opentab1 = 0;
+        $('#right_container').css('max-width', '20px');
+        $('#right_container').css('border', 'dotted 1px black');
+        $('#login_container').css('max-width', '0px');
+        $('#login_container').css('max-height', '0px');
+        $('#info_container').css('max-width', '0px');
+        $('#info_container').css('max-height', '0px');
+        $('#openInfoTab').css('height', '200px');
+    }
+}
+
+function changeStylingOnClick2(openOrNot)
+{
+    if (openOrNot == 0)
+    {
+        // not open
+        console.log("not open");
+        opentab2 = 1;
+
+        $('#userlist_container').css('max-width', '220px');
+        $('#userlist_container').css('padding-right', '40px');
+        $('#userlist_container').css('border', 'black 1px black');
+        $('#userlist').css('max-width', '');
+        $('#userlist').css('max-height', '');
+        $('#openUserTab').css('height', '30px');;
+    } else
+    {
+        // Open
+        console.log("open");
+        opentab2 = 0;
+        $('#userlist_container').css('max-width', '20px');
+        $('#userlist_container').css('padding', '0');
+        $('#userlist_container').css('border', 'dotted 1px black');
+        $('#userlist').css('max-width', '0px');
+        $('#userlist').css('max-height', '0px');
+        $('#openUserTab').css('height', '165px');
+    }
 }
 
 
