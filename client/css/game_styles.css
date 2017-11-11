@@ -40,10 +40,10 @@ body {
     padding: 0;
     margin: 10px 0 0 0; /*top, right, bottom, left*/
     font-weight: bold;
+    text-decoration: underline;
 }
 
 #opponent {
-    font-size: 22px;
     color: orange;
     padding: 0;
     margin: 10px 0 0 0; /*top, right, bottom, left*/
@@ -52,7 +52,6 @@ body {
 }
 
 #yourturn {
-    font-size: 18px;
     color: orangered;
     padding: 0 0 10px 0;
     margin: 5px 0 0 0; /*top, right, bottom, left*/
@@ -61,12 +60,12 @@ body {
 }
 
 #wininfo {
-    font-size: 25px;
     color: green;
     padding: 0 0 10px 0; /*top, right, bottom, left*/
     margin: 10px 0 0 0; /*top, right, bottom, left*/
     font-weight: bold;
     text-decoration: underline;
+    font-size: 25px;
 }
 
 #exitmatch_btn {

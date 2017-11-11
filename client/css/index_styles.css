@@ -21,9 +21,10 @@ body {
     border: 1px solid black;
     padding-right: 40px;
     overflow: hidden;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     max-width: 200px;
+    max-height: 800px;
 }
 
 #userlist {
@@ -92,14 +93,13 @@ body {
 }
 
 #login_btn_clicked {
-    margin-top: 15px;
+    margin-top: 10px;
     height: 30px;
     background: grey;
     border: 1px solid black;
     padding-left: 10px;
     padding-right: 10px;
     color: #ffffff;
-    float: right;
     border-radius: 10px;
     margin-left: 25px;
 }

@@ -109,7 +109,18 @@ class Tictactoe_online
         if (checkHor() >=3)
         {
             //alert(`Game Over! ${color} has won!`);
-            $('#index_title h1').html(`${color} has won!`);
+            //$('#index_title h1').html(`${color} has won!`);
+            if (color == 'red')
+            {
+                // X won
+                $('#wininfo').html('X Won');
+            } else {
+                // O won
+                $('#wininfo').html('O Won');
+            }
+            const $exitbtn = $('#exitmatch_btn_notactive');
+            $exitbtn.attr('id', 'exitmatch_btn');
+            $exitbtn.html('Exit');
         }
 
         function checkVer()
@@ -128,7 +139,17 @@ class Tictactoe_online
         }
         if (checkVer() >= 3)
         {
-            $('#index_title h1').html(`${color} has won!`);
+            if (color == 'red')
+            {
+                // X won
+                $('#wininfo').html('X Won');
+            } else {
+                // O won
+                $('#wininfo').html('O Won');
+            }
+            const $exitbtn = $('#exitmatch_btn_notactive');
+            $exitbtn.attr('id', 'exitmatch_btn');
+            $exitbtn.html('Exit');
         }
 
         function checkDiaTLtoBR()
@@ -147,7 +168,17 @@ class Tictactoe_online
         }
         if (checkDiaTLtoBR() >= 3)
         {
-            $('#index_title h1').html(`${color} has won!`);
+            if (color == 'red')
+            {
+                // X won
+                $('#wininfo').html('X Won');
+            } else {
+                // O won
+                $('#wininfo').html('O Won');
+            }
+            const $exitbtn = $('#exitmatch_btn_notactive');
+            $exitbtn.attr('id', 'exitmatch_btn');
+            $exitbtn.html('Exit');
         }
 
         function checkDiaTRtoBL()
@@ -169,10 +200,21 @@ class Tictactoe_online
         }
         if (checkDiaTRtoBL() >= 3)
         {
-            $('#index_title h1').html(`${color} has won!`);
+            if (color == 'red')
+            {
+                // X won
+                $('#wininfo').html('X Won');
+            } else {
+                // O won
+                $('#wininfo').html('O Won');
+            }
+            const $exitbtn = $('#exitmatch_btn_notactive');
+            $exitbtn.attr('id', 'exitmatch_btn');
+            $exitbtn.html('Exit');
         }
 
     }
+
 
 
     createGrid()
@@ -234,6 +276,11 @@ class Tictactoe_online
                 // Not this clients turn turn
             }
         });
+
+        $('#right_container').on('click', '#exitmatch_btn', function () {
+            //const client_script = new Client_Script();
+            const client_script = new Client_script(gUsername);
+        });
     }
 }
 
@@ -241,32 +288,4 @@ function $getCell(i, j)
 {
     return $(`.col[data-row='${i}'][data-col='${j}']`);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

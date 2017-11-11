@@ -5,6 +5,28 @@ var nameArray = new Array();
 var idArray = new Array();
 var testname, testid;
 
+class Client_script
+{
+    constructor(uservalue)
+    {
+        //console.log(username, uservalue);
+        //username = uservalue;
+        createMiddlesection();
+
+        if (username)
+        {
+            //console.log(username);
+            $('#challenge_btn').attr('class', 'btn_active');
+        } else {
+            //console.log('no username', username);
+        }
+
+        var killId = setTimeout(function() {
+            for (var i = killId; i > 0; i--) clearInterval(i)
+        }, 100);
+    }
+}
+
 $(document).ready(function () {
     $userlist = $('#userlist');
 
@@ -17,7 +39,6 @@ $(document).ready(function () {
     //drawChallengeSection();
 
 });
-
 
 function setupEventListeners()
 {
@@ -120,6 +141,10 @@ function setupEventListeners()
                 challenged: username,
                 challengedid: socket.id
             });
+
+            var killId = setTimeout(function() {
+                for (var i = killId; i > 0; i--) clearInterval(i)
+            }, 1000);
         } else {
             alert("Something went wrong, Couldn't find the player you accepted the challenge from...");
         }
@@ -178,7 +203,6 @@ socket.on('challenged', function (data) {
     setCountDown(data.challenger, time);
 });
 
-
 function setCountDown(name, time)
 {
     let i = 60;
@@ -221,13 +245,16 @@ socket.on('other_accept_challenge', function (data) {
     console.log('Cuserid', data.userid);*/
 });
 
-function drawChallengeSection()
+function createMiddlesection()
 {
-    const $middle_section = $('#middlesection');
-    const $title = ('<h3><u>Opponent</u></h3>');
-    const $oppo = ('<p id="oppo">Noone Selected</p>');
-    const $button = ('<button id="challenge_btn" class="btn_grey">Challenge</button>');
-    const $requesttable = ('<div id="requestlist_container">\n' +
+    //console.log(this.challenger, this.challenged, this.challengerid, this.challengedid);
+    const $board = $('#middlesection');
+    $board.html('');
+    const $section = '<h3><u>Opponent</u></h3>\n' +
+        '        <p id="oppo">Noone Selected</p>\n' +
+        '        <button id="challenge_btn" class="btn_grey">Challenge</button>\n' +
+        '\n' +
+        '        <div id="requestlist_container">\n' +
         '            <table id="requestlist">\n' +
         '                <tr>\n' +
         '                    <th>Challenger</th>\n' +
@@ -235,14 +262,17 @@ function drawChallengeSection()
         '                    <th>Accept/Deny</th>\n' +
         '                </tr>\n' +
         '            </table>\n' +
-        '        </div>');
-    $middle_section.append($title);
-    $middle_section.append($oppo);
-    $middle_section.append($button);
-    $middle_section.append($requesttable);
+        '        </div>';
+    $board.append($section);
+
+    $('#opponent').html('');
+    $('#yourturn').html('');
+    $('#wininfo').html('');
+    $('#exitmatch_btn').html('');
+    $('#exitmatch_btn').attr('id', 'exitmatch_btn_notactive');
+
+
 }
-
-
 
 
 
