@@ -7,18 +7,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="css/index_styles.css" rel="stylesheet"/>
     <link href="css/game_styles.css" rel="stylesheet"/>
+    <link href="css/mobile_styles.css" rel="stylesheet"/>
     <script src="js/tictactoe_online.js"></script>
+    <script src="js/change_layout.js"></script>
     <script src="js/client_script.js"></script>
 </head>
 <body id="index_body">
 
 <div id="index_container">
-    <div id="index_title">
-        <h1>Play Tic Tac Toe SocketIO</h1>
+    <div id="index_title" class="index_title">
+        <h1 id="title">Play Tic Tac Toe SocketIO</h1>
     </div>
-    <div id="userlist_container">
-        <div id="openUserTab"></div>
-        <ul id="userlist">
+
+    <div id="userlist_container" class="userlist_container">
+        <div id="openUserTab" class="openUserTab"></div>
+        <ul id="userlist" class="userlist">
             <b><u>Users On the line</u></b>
         </ul>
     </div>
@@ -53,9 +56,9 @@
                 </tr>
             </table>
         </div>
-
-
     </div>
+
+    <div id="mobile_btn"class="mobile_btn"></div>
 
 </div>
 

@@ -1,0 +1,86 @@
+.index_title_large {
+    font-size: 40px;
+    text-align: center;
+    color: green;
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.mobile_btn_small {
+    background-image: url("../img/laptopicon2large.png");
+    height: 120px;
+    width: 120px;
+    margin: 5px 0 0 5px; /*top, right, bottom, left*/
+    position: fixed;
+    bottom: 8px;
+    left: 5px;
+}
+
+.mobile_btn_small:hover {
+    background-image: url("../img/laptopiconlarge.png");
+}
+
+.userlist_container_mobile {
+    margin-left: 10px;
+    border: 1px solid black;
+    padding-right: 40px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    max-width: 200px;
+    max-height: 800px;
+
+    position: absolute;
+    z-index: 10;
+    left: 8px;
+}
+
+.userlist_mobile {
+    list-style: none;
+    overflow: hidden;
+}
+
+.userlist_mobile li {
+    margin: 5px;
+}
+
+.openUserTab_open {
+    height: 95px;
+    width: 95px;
+}
+
+.openUserTab_closed {
+    height: 40px;
+    width: 0px;
+}
+
+.userlist_container_mobile_closed {
+    margin-left: 10px;
+    border: 1px solid black;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+
+    position: absolute;
+    z-index: 10;
+    left: 8px;
+}
+
+.userlist_mobile_closed {
+    list-style: none;
+    overflow: hidden;
+    max-width: 0px;
+    max-height: 0px;
+    padding: 0;
+    margin: 0;
+}
+
+.userlist_mobile_open {
+    list-style: none;
+    overflow: hidden;
+    padding-right: 25px;
+    font-size: 40px;
+    margin-top: -15px;
+}

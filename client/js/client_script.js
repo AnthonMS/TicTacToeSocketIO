@@ -36,8 +36,9 @@ $(document).ready(function () {
     setupEventListeners();
 
     const $container = $("#index_container");
-    changeStylingOnResize($container);
-    changeStylingOnResize2($container);
+    //changeStylingOnResize($container);
+    //changeStylingOnResize2($container);
+
 
 });
 
@@ -158,30 +159,19 @@ function setupEventListeners()
     });
     //-----------------------------------------------------------------------------------------------
 
-    $container.on('click', '#openInfoTab', function () {
-        console.log($(this).parent());
-        //$(this).parent().maxWidth(220);
-        changeStylingOnClick(opentab1);
+
+    $container.on('click', '.mobile_btn', function () {
+        const change_layout = new Change_layout(1);
     });
 
-    $container.on('click', '#info_container', function () {
-        if ($container.width() <= 750)
-        {
-            //changeStylingOnResize($container)
-
-        }
+    $container.on('click', '.mobile_btn_small', function () {
+        const change_layout = new Change_layout(2);
     });
 
     $container.on('click', '#openUserTab', function () {
-        changeStylingOnClick2(opentab2);
-    });
-
-    //$container.on('click')
-
-    $(window).on('resize', function () {
-        //console.log('resize:', $container.width())
-        changeStylingOnResize($container);
-        changeStylingOnResize2($container);
+        //changeStylingOnClick2(opentab2);
+        $('#openUserTab').attr('class', 'openUserTab_closed');
+        $('#userlist').attr('class', 'userlist_mobile_open');
     });
 
 }
