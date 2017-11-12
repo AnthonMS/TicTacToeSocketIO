@@ -28,7 +28,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('newuser', function (data) {
-        //console.log(data.name + ' ' + socket.id);
+        console.log(data.name + ' ' + socket.id);
         nameArray.push(data.name);
         idArray.push(data.id);
         io.sockets.emit('newuser', data);
@@ -50,12 +50,12 @@ io.on('connection', function(socket){
     });
 
     socket.on('challenge', function(data) {
-        //console.log(data);
+        console.log(data);
         socket.broadcast.to(data.challengedid).emit('challenged', data);
     });
 
     socket.on('accept_challenge', function(data) {
-        //console.log(data);
+        console.log(data);
         // Send data to guy accepting challenge
         //socket.emit('accept_challenge', data);
         socket.emit('you_accept_challenge', {
@@ -68,7 +68,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('startgame', function (data) {
-        //console.log(data);
+        console.log(data);
         socket.broadcast.to(data.userid).emit('other_accept_challenge', data);
     });
 

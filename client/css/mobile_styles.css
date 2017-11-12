@@ -48,11 +48,21 @@
 .openUserTab_open {
     height: 95px;
     width: 95px;
+    background-image: url("../img/openusertab_orange.png");
+}
+
+.openUserTab_open:hover {
+    background-image: url("../img/openusertab_blue.png");
 }
 
 .openUserTab_closed {
-    height: 40px;
-    width: 0px;
+    height: 50px;
+    width: 100%;
+    background-image: url("../img/closeusertab_orange.png");
+}
+
+.openUserTab_closed:hover {
+    background-image: url("../img/closeusertab_blue.png");
 }
 
 .userlist_container_mobile_closed {
@@ -82,5 +92,224 @@
     overflow: hidden;
     padding-right: 25px;
     font-size: 40px;
-    margin-top: -15px;
+    margin-top: 0;
 }
+
+.right_container_mobile_closed {
+    text-align: center;
+    margin-right: 10px;
+    overflow: hidden;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 10px;
+
+    position: absolute;
+    z-index: 10;
+    right: 8px;
+}
+
+.login_container_mobile_closed {
+    overflow: hidden;
+    margin-right: 30px;
+    width: 0;
+    height: 0;
+}
+
+.info_container_mobile_closed {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+}
+
+.login_container_mobile_open {
+    overflow: hidden;
+    margin-right: 30px;
+}
+
+.info_container_mobile_open {
+    overflow: hidden;
+}
+
+.openInfoTab_open {
+    height: 95px;
+    width: 95px;
+    background-image: url("../img/openinfotab_orange.png");
+}
+
+.openInfoTab_open:hover {
+    background-image: url("../img/openinfotab_blue.png");
+}
+
+.openInfoTab_closed {
+    height: 50px;
+    width: 100%;
+    background-image: url("../img/closeinfotab_orange.png");
+}
+
+.openInfoTab_closed:hover {
+    background-image: url("../img/closeinfotab_blue.png");
+}
+
+.name_input_mobile {
+    width: 350px;
+    height: 55px;
+    margin-left: 25px;
+    margin-top: 15px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.login_btn_mobile {
+    margin-top: 10px;
+    height: 50px;
+    background: #e8491d;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-left: 25px;
+}
+.login_btn_mobile:hover {
+    background: blue;
+    cursor: pointer;
+}
+
+.login_btn_mobile_clicked {
+    margin-top: 10px;
+    height: 50px;
+    background: grey;
+    border: 1px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-left: 25px;
+}
+
+.gameinfo_mobile {
+    font-size: 30px;
+    padding: 0;
+    margin: 10px 0 0 0; /*top, right, bottom, left*/
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.opponent_mobile {
+    font-size: 50px;
+    color: orange;
+    padding: 0;
+    margin: 10px 0 0 0; /*top, right, bottom, left*/
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.yourturn_mobile {
+    font-size: 40px;
+    color: orangered;
+    padding: 0 0 10px 0;
+    margin: 5px 0 0 0; /*top, right, bottom, left*/
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.wininfo_mobile {
+    color: green;
+    padding: 0 0 10px 0; /*top, right, bottom, left*/
+    margin: 10px 0 0 0; /*top, right, bottom, left*/
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 65px;
+}
+
+
+.oppotitle_mobile {
+    color: red;
+    font-size: 58px;
+}
+.oppo_mobile {
+    color: black;
+    font-weight: bold;
+    margin-top: -25px;
+    font-size: 38px;
+    text-align: center;
+}
+
+.challenge_btn_mobile {
+    font-size: 35px;
+    background: grey;
+    border: 1px solid black;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.challenge_btn_active_mobile {
+    font-size: 35px;
+    background: #e8491d;
+    border: 1px solid black;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.challenge_btn_active_mobile:hover {
+    background: blue;
+    cursor: pointer;
+}
+
+
+.requestlist_container_mobile {
+    margin-top: 20px;
+}
+
+.requestlist_mobile {
+    width: 100%;
+}
+
+.requestlist_mobile, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.requestlist_mobile th {
+    background-color: #cccccc;
+    padding: 5px;
+    text-align: center;
+    font-size: 25px;
+
+}
+
+.requestlist_mobile td {
+    background-color: #eaeaea;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.requestlist_mobile td div {
+    margin: auto;
+    text-align: center;
+}
+
+.requestlist_mobile td p {
+    font-size: 15px;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+

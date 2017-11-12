@@ -72,7 +72,8 @@ function setupEventListeners()
                 name: $input_name.val(),
                 id: socket.id
             });
-            $(this).attr('id', 'login_btn_clicked');
+
+            $(this).attr('class', 'login_btn_clicked');
             $('#challenge_btn').attr('class', 'btn_active');
         }
     });
@@ -161,17 +162,45 @@ function setupEventListeners()
 
 
     $container.on('click', '.mobile_btn', function () {
-        const change_layout = new Change_layout(1);
+        const change_layout = new Change_layout(1, username);
     });
 
     $container.on('click', '.mobile_btn_small', function () {
-        const change_layout = new Change_layout(2);
+        const change_layout = new Change_layout(2, username);
     });
 
     $container.on('click', '#openUserTab', function () {
         //changeStylingOnClick2(opentab2);
-        $('#openUserTab').attr('class', 'openUserTab_closed');
-        $('#userlist').attr('class', 'userlist_mobile_open');
+        // if ($(this).hasClass('empty'))
+        if ($('#openUserTab').hasClass('openUserTab_closed'))
+        {
+            // Then the Userlist is open
+            $('#openUserTab').attr('class', 'openUserTab_open');
+            $('#userlist').attr('class', 'userlist_mobile_closed');
+        }
+        else if ($('#openUserTab').hasClass('openUserTab_open'))
+        {
+            // Then the userlist is closed
+            $('#openUserTab').attr('class', 'openUserTab_closed');
+            $('#userlist').attr('class', 'userlist_mobile_open');
+        }
+    });
+
+    $container.on('click', '#openInfoTab', function () {
+        if ($('#openInfoTab').hasClass('openInfoTab_closed'))
+        {
+            // Then the Userlist is open
+            $('#openInfoTab').attr('class', 'openInfoTab_open');
+            $('#login_container').attr('class', 'login_container_mobile_closed');
+            $('#info_container').attr('class', 'info_container_mobile_closed');
+        }
+        else if ($('#openInfoTab').hasClass('openInfoTab_open'))
+        {
+            // Then the userlist is closed
+            $('#openInfoTab').attr('class', 'openInfoTab_closed');
+            $('#login_container').attr('class', 'login_container_mobile_open');
+            $('#info_container').attr('class', 'info_container_mobile_open');
+        }
     });
 
 }

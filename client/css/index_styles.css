@@ -14,21 +14,7 @@ body {
     border-radius: 10px;
 }
 
-.mobile_btn {
-    background-image: url("../img/mobileicon2small.png");
-    height: 72px;
-    width: 72px;
-    margin: 5px 0 0 5px; /*top, right, bottom, left*/
-    position: fixed;
-    bottom: 8px;
-    left: 5px;
-}
-
-.mobile_btn:hover {
-    background-image: url("../img/mobileicon1small.png");
-}
-
-.userlist_container {
+#userlist_container {
     margin-left: 10px;
     border: 1px solid black;
     padding-right: 40px;
@@ -43,15 +29,14 @@ body {
     left: 8px;
 }
 
-.userlist {
+#userlist {
     list-style: none;
     overflow: hidden;
 }
 
-.userlist li {
+#userlist li {
     margin: 5px;
 }
-
 
 .marked_listitem {
     background-color: deepskyblue;
@@ -60,10 +45,6 @@ body {
 #userlist li:hover {
     background-color: lightgrey;
     cursor: pointer;
-}
-
-.openUserTab {
-
 }
 
 #right_container {
