@@ -28,14 +28,14 @@ io.on('connection', function(socket){
     });
 
     socket.on('newuser', function (data) {
-        console.log(data.name + ' ' + socket.id);
+        //console.log(data.name + ' ' + socket.id);
         nameArray.push(data.name);
         idArray.push(data.id);
         io.sockets.emit('newuser', data);
     })
 
     socket.on('disconnect', function() {
-        console.log(socket.id + ' disconnected...')
+        //console.log(socket.id + ' disconnected...')
         for (let i = 0; i < idArray.length; i++)
         {
             let id = idArray[i];
@@ -50,12 +50,12 @@ io.on('connection', function(socket){
     });
 
     socket.on('challenge', function(data) {
-        console.log(data);
+        //console.log(data);
         socket.broadcast.to(data.challengedid).emit('challenged', data);
     });
 
     socket.on('accept_challenge', function(data) {
-        console.log(data);
+        //console.log(data);
         // Send data to guy accepting challenge
         //socket.emit('accept_challenge', data);
         socket.emit('you_accept_challenge', {
@@ -68,12 +68,12 @@ io.on('connection', function(socket){
     });
 
     socket.on('startgame', function (data) {
-        console.log(data);
+        //console.log(data);
         socket.broadcast.to(data.userid).emit('other_accept_challenge', data);
     });
 
     socket.on('colclick', function (data) {
-        console.log(data);
+        //console.log(data);
         socket.broadcast.to(data.id).emit('colclick_activate', data);
         socket.emit('colclick_deactivate', data);
     });

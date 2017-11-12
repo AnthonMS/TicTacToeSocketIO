@@ -64,6 +64,13 @@ class Tictactoe_online
             $('#yourturn').html(`${gOppoName}'s Turn`);
 
             that.checkForWinner(data.row, data.col, data.color);
+            if (that.checkForDraw() == true)
+            {
+                $('#wininfo').html('Draw');
+                const $exitbtn = $('#exitmatch_btn_notactive');
+                $exitbtn.attr('id', 'exitmatch_btn');
+                $exitbtn.html('Exit');
+            }
 
         });
         socket.on('colclick_activate', function (data) {
@@ -78,6 +85,13 @@ class Tictactoe_online
             $('#yourturn').html(`Your Turn`);
 
             that.checkForWinner(data.row, data.col, data.color);
+            if (that.checkForDraw() == true)
+            {
+                $('#wininfo').html('Draw');
+                const $exitbtn = $('#exitmatch_btn_notactive');
+                $exitbtn.attr('id', 'exitmatch_btn');
+                $exitbtn.html('Exit');
+            }
         });
 
     }
@@ -213,6 +227,27 @@ class Tictactoe_online
             $exitbtn.html('Exit');
         }
 
+    }
+
+    checkForDraw()
+    {
+        //console.log('testing123');
+        for (let i = 0; i < this.ROWS; i++)
+        {
+            for (let j = 0; j < this.COLS; j++)
+            {
+                let $checkCell = $getCell(i, j);
+
+                if ($checkCell.data('player'))
+                {
+                    //console.log('column filled', i, j);
+                } else {
+                    //console.log('column free', i, j);
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
