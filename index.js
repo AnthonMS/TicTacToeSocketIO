@@ -78,6 +78,11 @@ io.on('connection', function(socket){
         socket.emit('colclick_deactivate', data);
     });
 
+    socket.on('sendmessage', function (data) {
+        console.log(data);
+        io.sockets.emit('recievemessage', data);
+    });
+
 });
 
 

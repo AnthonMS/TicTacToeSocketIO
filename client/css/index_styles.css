@@ -109,6 +109,33 @@ body {
     margin-left: 25px;
 }
 
+#chat_title {
+    float: left;
+    padding: 0;
+    margin: 0 0 0 10px; /*top, right, bottom, left*/
+}
+
+.message {
+    padding: 5px 2px 5px 2px; /*top, right, bottom, left*/
+    margin: 0; /*top, right, bottom, left*/
+}
+
+#message_input {
+    position: absolute;
+    left: 5px;
+    max-width: 150px;
+    border: 1px solid black;
+    border-radius: 10px;
+    max-lines: 1;
+}
+
+#sendMessage_btn {
+    position: absolute;
+    right: 5px;
+    max-width: 50px;
+    border-radius: 10px;
+}
+
 #middlesection {
     text-align: center;
     overflow: hidden;

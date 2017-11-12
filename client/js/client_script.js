@@ -160,8 +160,33 @@ function setupEventListeners()
     });
     //-----------------------------------------------------------------------------------------------
 
+    $container.on('click', '#sendMessage_btn', function () {
+        var message = $('#message_input').val();
+        if (message)
+        {
+            var randomMessageId = Math.floor((Math.random() * 1000000) + 1);
+            //console.log(randomMessageId);
+            //console.log(message);
+            if (!username)
+            {
+                socket.emit('sendmessage', {
+                    sender: 'Anon',
+                    message: message,
+                    messageId: randomMessageId
+                });
+            } else {
+                socket.emit('sendmessage', {
+                    sender: username,
+                    message: message,
+                    messageId: randomMessageId
+                });
+            }
 
-    $container.on('click', '.mobile_btn', function () {
+        }
+    });
+
+
+   /* $container.on('click', '.mobile_btn', function () {
         const change_layout = new Change_layout(1, username);
     });
 
@@ -201,7 +226,7 @@ function setupEventListeners()
             $('#login_container').attr('class', 'login_container_mobile_open');
             $('#info_container').attr('class', 'info_container_mobile_open');
         }
-    });
+    });*/
 
 }
 
@@ -269,7 +294,6 @@ function setCountDown(name, time)
         //console.log("1 minute has passed! Counter should stop");
         $(`#name_${name}`).remove();
     }
-
 }
 
 socket.on('you_accept_challenge', function (data) {
@@ -290,6 +314,44 @@ socket.on('other_accept_challenge', function (data) {
     console.log('Cusername', data.username);
     console.log('Cuserid', data.userid);*/
 });
+
+
+socket.on('recievemessage', function (data) {
+    const $messageContainer = $('#chat_container');
+    const $message = (`<p class="message" id="${data.messageId}"><b>${data.sender}:</b> ${data.message}</p>`);
+    $messageContainer.append($message);
+
+    var date = new Date();
+    var time = date.toLocaleTimeString();
+    time = date.getTime() + 1*60*1000; // add 1 min
+    //time = time - 30;
+    setCountDownMessage(data.messageId);
+
+    //setCountDown(data.challenger, time);
+});
+
+function setCountDownMessage(messageId)
+{
+    let i = 10;
+    var counter = setInterval(function () {
+        i--;
+        //console.log('Testing');
+
+        if (i == 0)
+        {
+            //console.log('time out, delete message');
+            stopCounter();
+        }
+
+    }, 1000);
+
+    function stopCounter() {
+        clearInterval(counter);
+        //console.log("1 minute has passed! Counter should stop");
+        //messageElement.remove();
+        $(`#${messageId}`).remove();
+    }
+}
 
 function createMiddlesection()
 {
@@ -320,7 +382,7 @@ function createMiddlesection()
 
 }
 
-function changeStylingOnResize(selector) {
+/*function changeStylingOnResize(selector) {
     if (selector.width() <= 750)
     {
         opentab1 = 0;
@@ -420,7 +482,7 @@ function changeStylingOnClick2(openOrNot)
         $('#userlist').css('max-height', '0px');
         $('#openUserTab').css('height', '165px');
     }
-}
+}*/
 
 
 
